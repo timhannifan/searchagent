@@ -1,0 +1,4 @@
+requests
+dotenv
+smolagents[litellm]
+ruff
