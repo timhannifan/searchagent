@@ -8,6 +8,7 @@ from smolagents import (
     CodeAgent,
     DuckDuckGoSearchTool,
     LiteLLMModel,
+    Tool,
     ToolCallingAgent,
     VisitWebpageTool,
     tool,
@@ -60,6 +61,14 @@ def search_wikipedia(query: str) -> str:
     except requests.exceptions.RequestException as e:
         return f"Error fetching Wikipedia data: {str(e)}"
 
+image_generation_tool = Tool.from_space(
+    # "black-forest-labs/FLUX.1-schnell",
+    # "multimodalart/stable-cascade",
+    "black-forest-labs/FLUX.1-dev",
+    name="image_generator",
+    description="Generate an image from a prompt"
+)
+
 def query_agent(query, model_id="gpt-4o-mini"):
     """Run the agent with a specific question."""
     model = LiteLLMModel(
@@ -80,8 +89,8 @@ def query_agent(query, model_id="gpt-4o-mini"):
 
     manager_agent = CodeAgent(
         model=model,
-        tools=[],
-        max_steps=3,
+        tools=[image_generation_tool],
+        max_steps=10,
         verbosity_level=2,
         planning_interval=5,
         additional_authorized_imports=AUTHORIZED_IMPORTS,
