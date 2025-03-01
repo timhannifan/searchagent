@@ -3,3 +3,4 @@ dotenv
 smolagents[litellm]
 ruff
 streamlit
+gradio_client
