@@ -1,3 +1,7 @@
+[tool.ruff]
+line-length = 80
+indent-width = 4
+
 [tool.ruff.lint]
 extend-select = [
   # by default, ruff enables all F and a subset of E rules
