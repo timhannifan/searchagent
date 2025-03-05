@@ -6,6 +6,11 @@ This repository contains a simple implementation of an agent-powered chatbot bui
 Visit the [live demo](https://searchagent-7zcnbnvqndoyrvho5ebt6w.streamlit.app/). 
 
 ## Usage
+Create a [project secrets file](https://docs.streamlit.io/develop/concepts/connections/secrets-management) to store your OpenAI key at `.streamlit/secrets.toml`. The contents of this file should read:
+```toml
+OPENAI_API_KEY = "sk-proj-dgpg..."
+```
+
 Run the Streamlit application locally with the following command:
 ```
 make run-app
