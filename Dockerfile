@@ -9,6 +9,7 @@ RUN pip install -r requirements.txt
 
 # Copy source files
 COPY src ./src
+COPY .streamlit .streamlit
 COPY pyproject.toml .
 
 CMD ["/bin/bash"]

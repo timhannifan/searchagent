@@ -3,7 +3,6 @@
 import argparse
 
 import requests
-from dotenv import load_dotenv
 from smolagents import (
     CodeAgent,
     DuckDuckGoSearchTool,
@@ -21,8 +20,8 @@ AUTHORIZED_IMPORTS = [
     "datetime",
 ]
 
-load_dotenv(override=True)
 custom_role_conversions = {"tool-call": "assistant", "tool-response": "user"}
+
 
 def parse_args():
     """Parses command-line arguments for the agent."""
@@ -32,6 +31,7 @@ def parse_args():
     )
     parser.add_argument("--model-id", type=str, default="gpt-4o-mini")
     return parser.parse_args()
+
 
 @tool
 def search_wikipedia(query: str) -> str:
@@ -61,13 +61,15 @@ def search_wikipedia(query: str) -> str:
     except requests.exceptions.RequestException as e:
         return f"Error fetching Wikipedia data: {str(e)}"
 
+
 image_generation_tool = Tool.from_space(
     # "black-forest-labs/FLUX.1-schnell",
     # "multimodalart/stable-cascade",
     "black-forest-labs/FLUX.1-dev",
     name="image_generator",
-    description="Generate an image from a prompt"
+    description="Generate an image from a prompt",
 )
+
 
 def query_agent(query, model_id="gpt-4o-mini"):
     """Run the agent with a specific question."""
@@ -101,11 +103,13 @@ def query_agent(query, model_id="gpt-4o-mini"):
 
     return answer
 
+
 def main():
     """Main function to run the agent."""
     args = parse_args()
     answer = query_agent(args.question, args.model_id)
     print(f"Got this answer: {answer}")
+
 
 if __name__ == "__main__":
     main()
