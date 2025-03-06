@@ -9,7 +9,7 @@ from agent import query_agent
 # App title
 st.set_page_config(page_title="searchagent")
 
-# Replicate Credentials
+# Credentials
 with st.sidebar:
     st.title("searchagent")
     st.subheader("Credentials")
